@@ -1,0 +1,176 @@
+<html>
+
+<head>
+
+    <script>
+
+        // Pergunta o nome do usuário
+        var Nome = prompt("Informe seu Nome.")
+        // Define uma variável para controlar se a senha está correta
+        var senhaCorreta = false;
+        // Loop para solicitar a senha até que ela seja digitada corretamente
+        while (!senhaCorreta) {
+            // Pergunta a senha do usuário
+            var senha = prompt("Digite sua Senha");
+            // Verifica se a senha é válida
+            if (senha == "3589") {
+                senhaCorreta = true;
+                alert("Olá " + Nome + ", é um prazer ter você por aqui!");
+            } else {
+                alert("Senha incorreta tente novamente.");
+            }
+        }
+
+        var saldo = 5000.5;//Float
+
+        function inicio() {
+            var escolha = parseInt(prompt('Banco do Povo \nSelecione uma opção: \n1. Saldo \n2. Extrato \n3. Saque \n4. Depósito  \n5. Transferencia \n6 Sair'));
+
+            if (escolha === 1) {
+                ver_saldo();
+            } else if (escolha === 2) {
+                extrato();
+            } else if (escolha === 3) {
+                fazer_saque();
+            } else if (escolha === 4) {
+                fazer_deposito();
+            } else if (escolha === 5) {
+                fazer_transferencia();
+            } else if (escolha === 6) {
+                sair();
+            } else {
+                erro();
+            }
+        }
+
+        function ver_saldo() {
+            var senhaCorreta = false;
+            while (!senhaCorreta) {
+                var senha = prompt("Digite sua senha:");
+                if (senha == "3589") {
+                    senhaCorreta = true;
+                    alert('Seu saldo atual é: ' + saldo);
+                    inicio();
+                } else {
+                    alert("Senha incorreta tente novamente.");
+                }
+            }
+        }
+
+        function extrato() {
+            var senhaCorreta = false;
+            while (!senhaCorreta) {
+                var senha = prompt("Digite sua senha:");
+                if (senha == "3589") {
+                    senhaCorreta = true;
+                    // Supondo que você tenha uma variável chamada "extrato" que contém o texto do extrato do banco
+                    alert(" Extrato Bancario \n Agencia 2030 Conta 122501-01\n Saldo Anterior \n - 03/11 Deposito de R$ 700,00 \n- 04/11 Pagamento em debito R$45,00 \n- 09/11 Pagamento em Debito R$60,00 \n- 10/11 Pagamento em Debito R$200,00 \n- 12/11 Pagamento em Debito R$79,00 \n- 15/11 Pagamento em Debito R$60,00 \n- 18/11 Pagamento em debito R$100,00 \n- 20/11 Pagamento em debito R$10,00 \n- 29/11 Pagamento em debito R$40,00 \n- 30/11 Pagamento em Debito R$60,00 \n- 30/11 Pagamento em debito R$100,00 \n- 30/11 Pagamento em debito R$10,00 \n- 30/11 Pagamento em Debito R$60,00 \n- 30/11 Pagamento em debito R$100,00 \n- 30/11 Pagamento em debito R$10,00\n- Saldo Total 700,00");
+                    // Exibindo um alerta com o texto do extrato
+                    inicio();
+                } else {
+                    alert("Senha incorreta tente novamente.");
+                }
+            }
+        }
+
+        function fazer_saque() {
+            var senhaCorreta = false;
+            while (!senhaCorreta) {
+                var senha = prompt("Digite sua senha:");
+                if (senha == "3589") {
+                    senhaCorreta = true;
+                    var saque = parseFloat(prompt('Qual o valor para saque?'));
+                    if (saque <= 0 || saque > saldo) {
+                        alert("Operação não autorizada");
+                        inicio();
+                        return; // Adicionado para interromper a execução da função caso a operação não seja autorizada.
+                    }
+                    if (isNaN(saque) || saque === '') {
+                        alert('Por favor, informe um número:');
+                        return;
+                    } else {
+                        saldo -= saque;
+                        alert(`Saque de R$${saque} realizado com sucesso. Saldo restante: R$${saldo}`);
+                        inicio();
+                    }
+                } else {
+                    alert("Senha incorreta, tente novamente.");
+                }
+            }
+        }
+
+        function fazer_deposito() {
+            var senhaCorreta = false;
+            while (!senhaCorreta) {
+                var senha = prompt("Digite sua senha:");
+                if (senha == "3589") {
+                    senhaCorreta = true;
+                    var deposito = parseFloat(prompt('Qual o valor para depósito?'));
+                    if (isNaN(deposito) || deposito <= 0) {
+                        alert('Operação não autorizada. Valor inválido para depósito.');
+                        fazer_deposito();
+                    } else {
+                        saldo += deposito;
+                        ver_saldo();
+                    }
+                    inicio();
+                } else {
+                    alert("Senha incorreta tente novamente.");
+                }
+            }
+        }
+
+        function fazer_transferencia() {
+            var senhaCorreta = false;
+
+            while (!senhaCorreta) {
+                var senha = prompt("Digite sua senha:");
+
+                if (senha === "3589") {
+                    senhaCorreta = true;
+                } else {
+                    alert("Senha incorreta, tente novamente.");
+                }
+                var contadestino = prompt("Digite o número da conta de destino:");
+                var valor_transferencia = Number(prompt("Digite o valor que deseja transferir:"));
+
+                if (valor_transferencia <= 0) {
+                    alert("Operação não autorizada. Valor inválido.");
+                    fazer_transferencia();
+                } else if (valor_transferencia > saldo) {
+                    alert("Operação não autorizada. Saldo insuficiente.");
+                    fazer_transferencia();
+                } else {
+                    saldo -= valor_transferencia;
+                    alert(`Transferência de R$${valor_transferencia} realizada com sucesso para a conta ${contadestino}.`);
+                    inicio();
+                        return;
+                        sair()
+                }
+            }
+        }
+        inicio();
+
+        function erro() {
+            alert('Por favor, informe um número entre 1 e 6');
+            inicio();
+        }
+
+
+        function sair() {
+        var sairDoSistema = confirm("Deseja sair do sistema?");
+        alert(Nome + " Foi um prazer ter você por aqui!")
+        if (sairDoSistema) {
+        window.close();
+        }
+    }
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
